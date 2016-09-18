@@ -1,0 +1,19 @@
+FROM centos:latest
+
+WORKDIR /src
+
+RUN yum update -y
+RUN yum install -y curl
+RUN curl --silent --location https://rpm.nodesource.com/setup_4.x | bash -
+RUN yum install -y nodejs
+RUN yum install -y git
+RUN npm install -g gulp
+RUN npm install -g npm
+
+ENV MONGO_HOST 192.168.1.2
+ENV BCRYPT_PASSWORD testing
+ENV JWT_PASSWORD abc
+
+EXPOSE 8081
+
+CMD ["npm", "run", "serve"]
